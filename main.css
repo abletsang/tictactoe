@@ -1,0 +1,43 @@
+table {
+	border-collapse: collapse;
+	margin: 100px auto;
+	display: none;
+}
+
+td {
+	border: 3px solid black;
+	height: 150px;
+	width: 150px;
+}
+
+
+.x {
+	background-image: url(https://image.freepik.com/free-icon/letter-x_318-26692.jpg);
+	background-size: 75%;
+	background-repeat: no-repeat;
+}
+
+.o {
+	background-image: url(http://grads.art.uiowa.edu/gradlg/05-196570.jpg);
+	background-size: 100%;
+}
+
+.play:hover,
+.chooseX:hover,
+.chooseO:hover
+ {
+	color: gray;
+}
+
+.play {
+	width: 200px;
+	margin: 150px auto;
+	text-align: center;
+}
+
+h3 {
+	margin: 150px auto;
+	text-align: center;
+	display: none;
+}
+
