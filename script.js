@@ -10,6 +10,10 @@ var startingTurn = document.querySelector(".turn");
 var turn = true;
 var playerMoves = [];
 var compMoves = [];
+var playerScoreDisplay = document.querySelector(".playerScore");
+var compScoreDisplay = document.querySelector(".compScore");
+var playerScore = 0;
+var compScore = 0;
 var availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 var winningCombos = [
 	[0, 1, 2],
@@ -106,6 +110,8 @@ function winner(arr) {
 				document.querySelector("body").style.background = "white";
 				board.style.display = "block";
 				document.querySelector(".status").textContent = "";
+				playerScore++;
+				playerScoreDisplay.textContent = playerScore;
 			}, 2000);
 			return;
 			} else {
@@ -118,6 +124,8 @@ function winner(arr) {
 					document.querySelector("body").style.background = "white";
 					board.style.display = "block";
 					document.querySelector(".status").textContent = "";
+					compScore++;
+					compScoreDisplay.textContent = compScore;
 				}, 2000);
 				return;
 			}
