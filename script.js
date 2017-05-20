@@ -77,8 +77,11 @@ for (var i = 0; i < squares.length; i++) {
 				availableMoves.splice(index, 1);
 				playerMoves.push(Number(this.id));
 				console.log(availableMoves);
-				winner(playerMoves);
-				computerPlay();
+				var result = winner(playerMoves);
+				if (result === false) {
+					computerPlay();
+				}
+				
 			}
 			
 		}
@@ -113,14 +116,14 @@ function winner(arr) {
 				board.style.display = "none";
 				document.querySelector(".status").textContent = "YOU WON!";
 				setTimeout(function() {
-				reset();
-				document.querySelector("body").style.background = "white";
-				board.style.display = "block";
-				document.querySelector(".status").textContent = "";
-				playerScore++;
-				playerScoreDisplay.textContent = playerScore;
-			}, 2000);
-			return;
+					reset();
+					document.querySelector("body").style.background = "white";
+					board.style.display = "block";
+					document.querySelector(".status").textContent = "";
+					playerScore++;
+					playerScoreDisplay.textContent = playerScore;
+				}, 1000);
+			return true;
 			} else {
 				document.querySelector("body").style.background = "black";
 				board.style.display = "none";
@@ -133,8 +136,8 @@ function winner(arr) {
 					document.querySelector(".status").textContent = "";
 					compScore++;
 					compScoreDisplay.textContent = compScore;
-				}, 2000);
-				return;
+				}, 1000);
+				return true;
 			}
 
 		}
@@ -148,8 +151,9 @@ function winner(arr) {
 		board.style.display = "block";
 		document.querySelector(".status").textContent = "";
 	}, 2000);
-	return;
+	return true;
 }
+return false;
 }
 
 // reset game function
@@ -163,4 +167,5 @@ function reset() {
 	if (turn === false) {
 		computerPlay();
 	}
+	whosTurn();
 }
