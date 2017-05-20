@@ -26,6 +26,7 @@ play.addEventListener("click", function() {
 chooseO.addEventListener("click", function() {
 	playerChoose.style.display = "none";
 	board.style.display = "block";
+	document.querySelector("h4").style.display = "block";
 	player = "o";
 	compPlayer = "x";
 });

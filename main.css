@@ -1,7 +1,21 @@
+body {
+	font-family: "Montserrat";
+}
+
+h1,
+h4 {
+	text-align: center;
+}
+
+h4 {
+	display: none;
+}
+
 table {
 	border-collapse: collapse;
 	margin: 100px auto;
 	display: none;
+	width: 500px;
 }
 
 td {
@@ -24,9 +38,9 @@ td {
 
 .play:hover,
 .chooseX:hover,
-.chooseO:hover
+.chooseO:hover,
  {
-	color: gray;
+	color: steelblue;
 }
 
 .play {
