@@ -140,7 +140,7 @@ function winner(arr) {
 		}
 	}
 	// if draw
-	if (availableMoves === []) {
+	if (availableMoves.length == 0) {
 		board.style.display = "none";
 		document.querySelector(".status").textContent = "It was a draw!";
 		setTimeout(function() {
