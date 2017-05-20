@@ -45,6 +45,7 @@ chooseO.addEventListener("click", function() {
 chooseX.addEventListener("click", function() {
 	playerChoose.style.display = "none";
 	board.style.display = "block";
+	document.querySelector("h4").style.display = "block";
 	player = "x";
 	compPlayer = "o";
 	whosTurn();
@@ -69,11 +70,13 @@ function whosTurn() {
 for (var i = 0; i < squares.length; i++) {
 	squares[i].addEventListener("click", function() {
 		if (turn === true) {
-			if (availableMoves[this.id] != -1) {
+			if (availableMoves.indexOf(Number(this.id)) != -1) {
 				this.textContent = player;
 				turn = false;
-				availableMoves[this.id] = -1;
+				var index = availableMoves.indexOf(Number(this.id));
+				availableMoves.splice(index, 1);
 				playerMoves.push(Number(this.id));
+				console.log(availableMoves);
 				winner(playerMoves);
 				computerPlay();
 			}
@@ -84,14 +87,18 @@ for (var i = 0; i < squares.length; i++) {
 
 // computers turn
 function computerPlay() {
-	var temp = Math.floor(Math.random() * 8);
-	if (availableMoves[temp] != -1) {
-		squares[temp].textContent = compPlayer;
-		turn = true;
-		compMoves.push(Number(temp));
-		winner(compMoves);
-	} else {
-		computerPlay();
+	var index = Math.floor(Math.random() * availableMoves.length);
+	for (var i = 0; i < squares.length; i++) {
+		if (Number(squares[i].id) === availableMoves[index]) {
+			squares[i].textContent = compPlayer;
+			turn = true;
+			console.log(availableMoves[index], squares[i].id);
+			compMoves.push(availableMoves[index]);
+			availableMoves.splice(index, 1);
+			console.log(availableMoves);
+			winner(compMoves);
+			return;
+		}
 	}
 }
 
@@ -132,29 +139,20 @@ function winner(arr) {
 
 		}
 	}
+	// if draw
+	if (availableMoves === []) {
+		board.style.display = "none";
+		document.querySelector(".status").textContent = "It was a draw!";
+		setTimeout(function() {
+		reset();
+		board.style.display = "block";
+		document.querySelector(".status").textContent = "";
+	}, 2000);
+	return;
 }
-// function winner(arr) {
-// 	for (var i = 0; i < 8; i++) {
-// 		var checks = 0;
-// 		var test = winningCombos[i].forEach(function(num) {
-// 			if (arr.indexOf(num) != -1) {
-// 				checks++;
-// 				console.log(checks);
-// 			}
-// 		});
-// 		if (checks == 3) {
-// 			reset();
-// 		}
-// 	}
-// }
+}
 
-
-// after 9 moves. draw
-
-// update scores
-
-// reset game
-
+// reset game function
 function reset() {
 	availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	for (var i = 0; i < squares.length; i++) {
