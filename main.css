@@ -38,9 +38,12 @@ tr td:nth-of-type(2) {
 
 .play:hover,
 .chooseX:hover,
-.chooseO:hover,
- {
+.chooseO:hover {
 	color: steelblue;
+}
+
+td:hover {
+	background-color: rgba(70,130,180,0.2);
 }
 
 .play {
