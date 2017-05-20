@@ -13,15 +13,24 @@ h4 {
 
 table {
 	border-collapse: collapse;
-	margin: 100px auto;
+	margin: 50px auto;
 	display: none;
-	width: 500px;
+	width: 456px;
 }
 
 td {
-	border: 3px solid black;
 	height: 150px;
 	width: 150px;
+}
+
+tr:nth-of-type(2) td {
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+}
+
+tr td:nth-of-type(2) {
+	border-right: 3px solid black;
+	border-left: 3px solid black;
 }
 
 
