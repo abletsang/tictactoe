@@ -160,4 +160,7 @@ function reset() {
 	}
 	playerMoves = [];
 	compMoves = [];
+	if (turn === false) {
+		computerPlay();
+	}
 }
