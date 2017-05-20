@@ -7,22 +7,27 @@ var squares = document.getElementsByTagName("td");
 var player;
 var compPlayer;
 var turn = true;
+var playerMoves = [];
+var compMoves = [];
+var availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var winningCombos = [
+	[0, 1, 2],
+	[3. 4. 5],
+	[6, 7, 8],
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	[0, 4, 8],
+	[2, 4, 6]
+];
 
 // ask to play?
-
-// ask X or O
-
-// alternate starting or not starting
-
-// after 9 moves. win, lose or draw
-
-// reset game
-
 play.addEventListener("click", function() {
 	play.style.display = "none";
 	playerChoose.style.display = "block";
 });
 
+// ask X or O
 chooseO.addEventListener("click", function() {
 	playerChoose.style.display = "none";
 	board.style.display = "block";
@@ -38,6 +43,20 @@ chooseX.addEventListener("click", function() {
 	compPlayer = "o";
 });
 
+// alternate starting or not starting
+
+
+// check for winner
+
+
+// after 9 moves. draw
+
+// reset game
+
+
+
+
+// players turn
 for (var i = 0; i < squares.length; i++) {
 	squares[i].addEventListener("click", function() {
 		if (turn === true) {
@@ -45,6 +64,7 @@ for (var i = 0; i < squares.length; i++) {
 				this.classList.add(player);
 				turn = false;
 				availableMoves[this.id] = -1;
+				playerMoves.push(this.id);
 				computerPlay();
 			}
 			
@@ -52,6 +72,7 @@ for (var i = 0; i < squares.length; i++) {
 	});
 }
 
+// computers turn
 function computerPlay() {
 	var temp = Math.floor(Math.random() * 8);
 	if (availableMoves[temp] != -1) {
@@ -64,11 +85,13 @@ function computerPlay() {
 	}
 }
 
+// reset board
 function reset() {
 	availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	for (var i = 0; i < squares.length; i++) {
 		squares[i].classList.remove("o");
 		squares[i].classList.remove("x");
 	}
+	playerMoves = [];
+	compMoves = [];
 }
-var availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
