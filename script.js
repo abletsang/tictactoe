@@ -94,13 +94,34 @@ function computerPlay() {
 // check for winner
 function winner(arr) {
 	for (var i = 0; i < 8; i++) {
-		console.log("in");
 		if (arr.indexOf(winningCombos[i][0]) != -1 &&
 			arr.indexOf(winningCombos[i][1]) != -1 &&
 			arr.indexOf(winningCombos[i][2]) != -1) {
-			console.log("inner");
-			reset();
+			if (arr === playerMoves) {
+				document.querySelector("body").style.background = "pink";
+				board.style.display = "none";
+				document.querySelector(".status").textContent = "YOU WON!";
+				setTimeout(function() {
+				reset();
+				document.querySelector("body").style.background = "white";
+				board.style.display = "block";
+				document.querySelector(".status").textContent = "";
+			}, 2000);
 			return;
+			} else {
+				document.querySelector("body").style.background = "black";
+				board.style.display = "none";
+				document.querySelector(".status").style.color = "white";
+				document.querySelector(".status").textContent = "You lost...";
+				setTimeout(function() {
+					reset();
+					document.querySelector("body").style.background = "white";
+					board.style.display = "block";
+					document.querySelector(".status").textContent = "";
+				}, 2000);
+				return;
+			}
+
 		}
 	}
 }
