@@ -6,13 +6,14 @@ var board = document.querySelector("table");
 var squares = document.getElementsByTagName("td"); 
 var player;
 var compPlayer;
+var startingTurn = document.querySelector(".turn");
 var turn = true;
 var playerMoves = [];
 var compMoves = [];
 var availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 var winningCombos = [
 	[0, 1, 2],
-	[3. 4. 5],
+	[3, 4, 5],
 	[6, 7, 8],
 	[0, 3, 6],
 	[1, 4, 7],
@@ -34,6 +35,7 @@ chooseO.addEventListener("click", function() {
 	document.querySelector("h4").style.display = "block";
 	player = "o";
 	compPlayer = "x";
+	whosTurn();
 });
 
 chooseX.addEventListener("click", function() {
@@ -41,9 +43,23 @@ chooseX.addEventListener("click", function() {
 	board.style.display = "block";
 	player = "x";
 	compPlayer = "o";
+	whosTurn();
 });
 
 // alternate starting or not starting
+function whosTurn() {
+	if (turn === true) {
+		startingTurn.textContent = "You start!";
+		setTimeout(function() {
+			startingTurn.style.display = "none";
+		}, 1000);
+	} else {
+		startingTurn.textContent = "Computer goes first";
+		setTimeout(function() {
+			startingTurn.style.display = "none";
+		}, 1000);
+	}
+}
 
 
 // check for winner

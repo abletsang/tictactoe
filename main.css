@@ -3,7 +3,8 @@ body {
 }
 
 h1,
-h4 {
+h4,
+.turn {
 	text-align: center;
 }
 
