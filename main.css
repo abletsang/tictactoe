@@ -22,6 +22,8 @@ table {
 td {
 	height: 150px;
 	width: 150px;
+	text-align: center;
+	font-size: 80px;
 }
 
 tr:nth-of-type(2) td {
@@ -32,18 +34,6 @@ tr:nth-of-type(2) td {
 tr td:nth-of-type(2) {
 	border-right: 3px solid black;
 	border-left: 3px solid black;
-}
-
-
-.x {
-	background-image: url(https://image.freepik.com/free-icon/letter-x_318-26692.jpg);
-	background-size: 75%;
-	background-repeat: no-repeat;
-}
-
-.o {
-	background-image: url(http://grads.art.uiowa.edu/gradlg/05-196570.jpg);
-	background-size: 100%;
 }
 
 .play:hover,
