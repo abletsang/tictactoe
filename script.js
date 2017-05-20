@@ -61,17 +61,6 @@ function whosTurn() {
 	}
 }
 
-
-// check for winner
-
-
-// after 9 moves. draw
-
-// reset game
-
-
-
-
 // players turn
 for (var i = 0; i < squares.length; i++) {
 	squares[i].addEventListener("click", function() {
@@ -80,7 +69,8 @@ for (var i = 0; i < squares.length; i++) {
 				this.textContent = player;
 				turn = false;
 				availableMoves[this.id] = -1;
-				playerMoves.push(this.id);
+				playerMoves.push(Number(this.id));
+				winner(playerMoves);
 				computerPlay();
 			}
 			
@@ -92,16 +82,50 @@ for (var i = 0; i < squares.length; i++) {
 function computerPlay() {
 	var temp = Math.floor(Math.random() * 8);
 	if (availableMoves[temp] != -1) {
-		console.log(temp);
 		squares[temp].textContent = compPlayer;
 		turn = true;
-		return;
+		compMoves.push(Number(temp));
+		winner(compMoves);
 	} else {
 		computerPlay();
 	}
 }
 
-// reset board
+// check for winner
+function winner(arr) {
+	for (var i = 0; i < 8; i++) {
+		console.log("in");
+		if (arr.indexOf(winningCombos[i][0]) != -1 &&
+			arr.indexOf(winningCombos[i][1]) != -1 &&
+			arr.indexOf(winningCombos[i][2]) != -1) {
+			console.log("inner");
+			reset();
+			return;
+		}
+	}
+}
+// function winner(arr) {
+// 	for (var i = 0; i < 8; i++) {
+// 		var checks = 0;
+// 		var test = winningCombos[i].forEach(function(num) {
+// 			if (arr.indexOf(num) != -1) {
+// 				checks++;
+// 				console.log(checks);
+// 			}
+// 		});
+// 		if (checks == 3) {
+// 			reset();
+// 		}
+// 	}
+// }
+
+
+// after 9 moves. draw
+
+// update scores
+
+// reset game
+
 function reset() {
 	availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	for (var i = 0; i < squares.length; i++) {
