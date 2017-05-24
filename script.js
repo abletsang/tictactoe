@@ -34,22 +34,23 @@ play.addEventListener("click", function() {
 
 // ask X or O
 chooseO.addEventListener("click", function() {
-	playerChoose.style.display = "none";
-	board.style.display = "block";
-	document.querySelector("h4").style.display = "block";
 	player = "o";
 	compPlayer = "x";
-	whosTurn();
+	showBoard();
 });
 
 chooseX.addEventListener("click", function() {
+	player = "x";
+	compPlayer = "o";
+	showBoard();
+});
+
+function showBoard() {
 	playerChoose.style.display = "none";
 	board.style.display = "block";
 	document.querySelector("h4").style.display = "block";
-	player = "x";
-	compPlayer = "o";
 	whosTurn();
-});
+}
 
 // alternate starting or not starting
 function whosTurn() {
@@ -66,6 +67,7 @@ function whosTurn() {
 	}
 }
 
+
 // players turn
 for (var i = 0; i < squares.length; i++) {
 	squares[i].addEventListener("click", function() {
@@ -80,21 +82,9 @@ for (var i = 0; i < squares.length; i++) {
 				if (result === false) {
 					computerPlay();
 				}
-				
 			}
-			
 		}
 	});
-}
-
-var indexTemp;
-function block() {
-	for (var i = 0; i < 3; i++) {
-		if (availableMoves.indexOf(winningCombos[soonWin][i]) === -1)
-			indexTemp = availableMoves.indexOf(winningCombos[soonWin][i]);
-			console.log('worked' + indexTemp);
-			return indexTemp;
-	}
 }
 
 // computers turn
@@ -106,7 +96,6 @@ function computerPlay() {
 		index = availableMoves.indexOf(temp);
 			} else {
 		index = Math.floor(Math.random() * availableMoves.length);
-		console.log("random");
 	}
 	for (var i = 0; i < squares.length; i++) {
 		if (Number(squares[i].id) === availableMoves[index]) {
@@ -126,7 +115,6 @@ function almostWin() {
 		var temp = winningCombos[i];
 		var hasArr = [];
 		var missingArr;
-		console.log(temp);
 		temp.forEach(function (num) {
 			if (playerMoves.indexOf(num) !== -1) {
 				hasArr.push(num);
@@ -135,7 +123,6 @@ function almostWin() {
 			}
 		});
 		if (hasArr.length === 2 && compMoves.indexOf(missingArr) == -1) {
-			console.log(missingArr);
 			return missingArr;
 		}
 	}
@@ -154,9 +141,6 @@ function winner(arr) {
 				document.querySelector(".status").textContent = "YOU WON!";
 				setTimeout(function() {
 					reset();
-					document.querySelector("body").style.background = "white";
-					board.style.display = "block";
-					document.querySelector(".status").textContent = "";
 					playerScore++;
 					playerScoreDisplay.textContent = playerScore;
 				}, 1000);
@@ -168,9 +152,6 @@ function winner(arr) {
 				document.querySelector(".status").textContent = "You lost...";
 				setTimeout(function() {
 					reset();
-					document.querySelector("body").style.background = "white";
-					board.style.display = "block";
-					document.querySelector(".status").textContent = "";
 					compScore++;
 					compScoreDisplay.textContent = compScore;
 				}, 1000);
@@ -185,8 +166,6 @@ function winner(arr) {
 		document.querySelector(".status").textContent = "It was a draw!";
 		setTimeout(function() {
 		reset();
-		board.style.display = "block";
-		document.querySelector(".status").textContent = "";
 	}, 1000);
 	return true;
 }
@@ -196,6 +175,9 @@ return false;
 // reset game function
 function reset() {
 	availableMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	document.querySelector("body").style.background = "white";
+	board.style.display = "block";
+	document.querySelector(".status").textContent = "";
 	for (var i = 0; i < squares.length; i++) {
 		squares[i].textContent = "";
 	}
