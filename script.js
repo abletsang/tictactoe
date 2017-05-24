@@ -55,16 +55,20 @@ function showBoard() {
 // alternate starting or not starting
 function whosTurn() {
 	if (turn === true) {
+		startingTurn.style.display = "block";
 		startingTurn.textContent = "You start!";
-		setTimeout(function() {
-			startingTurn.style.display = "none";
-		}, 1000);
+		clearStartingTurn();
 	} else {
-		startingTurn.textContent = "Computer goes first";
-		setTimeout(function() {
-			startingTurn.style.display = "none";
-		}, 1000);
+		startingTurn.style.display = "block";
+		startingTurn.textContent = "Computer goes first!";
+		clearStartingTurn();
 	}
+}
+
+function clearStartingTurn() {
+	setTimeout(function() {
+		startingTurn.style.display = "none";
+	}, 1000);
 }
 
 
@@ -157,7 +161,6 @@ function winner(arr) {
 				}, 1000);
 				return true;
 			}
-
 		}
 	}
 	// if draw
@@ -184,7 +187,9 @@ function reset() {
 	playerMoves = [];
 	compMoves = [];
 	if (turn === false) {
+		whosTurn();
 		computerPlay();
+		return;
 	}
 	whosTurn();
 }
