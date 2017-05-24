@@ -76,7 +76,6 @@ for (var i = 0; i < squares.length; i++) {
 				var index = availableMoves.indexOf(Number(this.id));
 				availableMoves.splice(index, 1);
 				playerMoves.push(Number(this.id));
-				console.log(availableMoves);
 				var result = winner(playerMoves);
 				if (result === false) {
 					computerPlay();
@@ -88,21 +87,59 @@ for (var i = 0; i < squares.length; i++) {
 	});
 }
 
+var indexTemp;
+function block() {
+	for (var i = 0; i < 3; i++) {
+		if (availableMoves.indexOf(winningCombos[soonWin][i]) === -1)
+			indexTemp = availableMoves.indexOf(winningCombos[soonWin][i]);
+			console.log('worked' + indexTemp);
+			return indexTemp;
+	}
+}
+
 // computers turn
 function computerPlay() {
-	var index = Math.floor(Math.random() * availableMoves.length);
+	var index = null;
+	// if find that they are about to win
+	if (almostWin() !== false) {
+		temp = almostWin();
+		index = availableMoves.indexOf(temp);
+			} else {
+		index = Math.floor(Math.random() * availableMoves.length);
+		console.log("random");
+	}
 	for (var i = 0; i < squares.length; i++) {
 		if (Number(squares[i].id) === availableMoves[index]) {
 			squares[i].textContent = compPlayer;
 			turn = true;
-			console.log(availableMoves[index], squares[i].id);
 			compMoves.push(availableMoves[index]);
 			availableMoves.splice(index, 1);
-			console.log(availableMoves);
 			winner(compMoves);
 			return;
 		}
 	}
+}
+
+function almostWin() {
+	// iterating over the winning combos
+	for (var i = 0; i < 8; i++) {
+		var temp = winningCombos[i];
+		var hasArr = [];
+		var missingArr;
+		console.log(temp);
+		temp.forEach(function (num) {
+			if (playerMoves.indexOf(num) !== -1) {
+				hasArr.push(num);
+			} else {
+				missingArr = num;
+			}
+		});
+		if (hasArr.length === 2 && compMoves.indexOf(missingArr) == -1) {
+			console.log(missingArr);
+			return missingArr;
+		}
+	}
+	return false;
 }
 
 // check for winner
@@ -150,7 +187,7 @@ function winner(arr) {
 		reset();
 		board.style.display = "block";
 		document.querySelector(".status").textContent = "";
-	}, 2000);
+	}, 1000);
 	return true;
 }
 return false;
